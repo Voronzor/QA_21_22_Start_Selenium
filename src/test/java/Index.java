@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -11,16 +12,30 @@ public class Index {
     WebDriver wd;
 
     @BeforeClass
-    public void setUp(){
+    public void setUp() {
         wd = new ChromeDriver();
-        wd.get("file:///C:/Users/Voronzor/Downloads/21.index.html");
+        wd.get("file:///C:/Users/marii/Downloads/21.index.html");
     }
 
     @Test
-    public void cssLocators(){
+    public void tableTest(){
+        //Canada
+        WebElement canada = wd.findElement(By.cssSelector("tr:nth-child(3)>td:last-child"));
+        Assert.assertEquals(canada.getText(),"Canada");
+    }
+
+    @Test
+    public void classwork(){
+        //parent
+
+    }
+
+
+    @Test
+    public void cssLocators() {
         //by tag name
         WebElement e1 = wd.findElement(By.tagName("button"));
-        WebElement element = wd.findElement(By.cssSelector("Button"));
+        WebElement element = wd.findElement(By.cssSelector("button"));
 
         List<WebElement> list = wd.findElements(By.tagName("a"));
         int i = list.size();
@@ -35,7 +50,7 @@ public class Index {
         List<WebElement> navlist1 = wd.findElements(By.cssSelector(".nav-item"));
 
 
-        //by ID
+        //by id
 
         WebElement nav = wd.findElement(By.id("nav"));
         WebElement nav1 = wd.findElement(By.cssSelector("#nav"));
@@ -49,6 +64,18 @@ public class Index {
         WebElement inputS = wd.findElement(By.name("name"));
 
 
+        //By.linkText By.partiaLinkText
+        WebElement el18 = wd.findElement(By.linkText("Item 1"));
+        WebElement el19 = wd.findElement(By.partialLinkText("m 1"));
+
+
+        WebElement inp = wd.findElement(By.cssSelector("[placeholder = 'Type your name']"));
+        //start
+        WebElement inp1 = wd.findElement(By.cssSelector("[placeholder^='Type']"));
+        //end
+        WebElement inp2 = wd.findElement(By.cssSelector("[placeholder$='name']"));
+        //contains
+        WebElement inp3 = wd.findElement(By.cssSelector("[placeholder*='your']"));
     }
 
 
